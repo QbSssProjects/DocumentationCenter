@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
+
+</head>
+<body>
+<h1>Wystąpił błąd</h1>
+
+
+
+<nav>
+    <div class="logo">ZenSpace</div>
+    <ul>
+        <li><a href="http://localhost:8080/">Home</a></li>
+        <li><a href="http://localhost:8080/viewDocs">Pliki</a></li>w
+    </ul>
+</nav>
+
+<main class="main-content">
+    <div class="card-grid">
+        <div class="card">
+            <p>Status: <span th:text="${status}">status</span></p>
+            <p>Error: <span th:text="${error}">error</span></p>
+            <p>Path: <span th:text="${path}">path</span></p>
+        </div>
+    </div>
+</main>
+
+
+</body>
+</html>

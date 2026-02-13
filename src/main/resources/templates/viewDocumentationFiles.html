@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
+
+    <meta charset="UTF-8">
+    <title>Przeglądarka dokumentacji</title>
+</head>
+<body>
+<nav>
+    <div class="logo">ZenSpace</div>
+    <ul>
+        <li><a href="http://localhost:8080/">Home</a></li>
+        <li><a href="http://localhost:8080/viewDocs">Pliki</a></li>
+
+    </ul>
+</nav>
+
+<main class="main-content">
+    <div class="sidenav">
+        <a th:each="entry : ${projects}"
+           th:text="${entry.value}"
+           th:href="@{/viewProject?={id}(id=${entry.key})}">
+        </a>
+
+    </div>
+    <div class="card-grid">
+        <div class="card" th:each="doc : ${documents}">
+            <h3 th:text="${doc.title}"></h3>
+            <p th:text="${doc.description}"></p>
+        </div>
+    </div>
+    <p th:if="${#lists.isEmpty(documents)}">
+        Brak dokumentów
+    </p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="http://localhost:8080/addProject" class="btn btn-green">Dodaj nowy projekt</a>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
+
+    <meta charset="UTF-8">
+    <title>Przeglądarka dokumentacji</title>
+</head>
+<body>
+<nav>
+    <div class="logo">ZenSpace</div>
+    <ul>
+        <li><a href="http://localhost:8080/">Home</a></li>
+        <li><a href="http://localhost:8080/viewDocs">Pliki</a></li>
+
+    </ul>
+</nav>
+
+<main class="main-content">
+    <div class="sidenav">
+        <a th:each="entry : ${projects}"
+           th:text="${entry.value}"
+           th:href="@{/viewProject?={id}(id=${entry.key})}">
+        </a>
+    </div>
+    <form th:action="@{/addProject}" method="post">
+        <div class="card" style="max-width: 500px;">
+        <h3>Tworzenie projektu</h3>
+
+        <div class="input-group">
+
+            <label>Tytuł projektu</label>
+            <input type="text" class="input-field" placeholder="np. Programowanie aplikacji mobilnych" name="projectName" pattern="^[^{}]*$"  required>
+
+        </div>
+        <button class="btn btn-primary" style="width: 100%;" type="submit">Zapisz</button>
+        </div>
+    </form>
+
+
+</main>
+</body>
+</html>
