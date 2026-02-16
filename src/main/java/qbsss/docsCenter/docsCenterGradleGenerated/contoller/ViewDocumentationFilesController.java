@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import qbsss.docsCenter.docsCenterGradleGenerated.globalVariables.GlobalVariablesContainerClass;
+
 import qbsss.docsCenter.docsCenterGradleGenerated.service.DocumentService;
 import qbsss.docsCenter.docsCenterGradleGenerated.service.ListOfProjectsService;
 import qbsss.docsCenter.docsCenterGradleGenerated.utils.ProjektyYamlReader;

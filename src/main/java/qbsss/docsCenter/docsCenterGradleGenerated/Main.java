@@ -10,6 +10,7 @@ import qbsss.docsCenter.docsCenterGradleGenerated.service.VariableService;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("path: " + System.getProperty("user.dir"));
         SpringApplication.run(Main.class, args);
     }
 

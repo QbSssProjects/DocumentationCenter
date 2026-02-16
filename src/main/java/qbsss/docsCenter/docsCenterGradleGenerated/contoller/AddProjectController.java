@@ -26,6 +26,7 @@ public class AddProjectController {
     private final File file =
             new File(System.getProperty("user.dir"), "projekty.yaml");
 
+
     // =========================
     // GET – wyświetlenie strony
     // =========================
@@ -33,6 +34,7 @@ public class AddProjectController {
     ViewProjects vp = new ViewProjects();
     @RequestMapping
     public String viewDocs(Model model) throws IOException {
+
         return vp.viewDocs(model);
 
 
@@ -52,7 +54,7 @@ public class AddProjectController {
 
         // dopisanie do pliku
         YamlWriterProjectUtil ywr = new YamlWriterProjectUtil();
-        ywr.writeConfig(projectName, 1);
+        ywr.writeConfig(projectName, ViewProjects.getProjects().keySet().size() + 1);
 
 
         // redirect = odświeżenie widoku (PRG pattern)

@@ -23,7 +23,7 @@
     <div class="sidenav">
         <a th:each="entry : ${projects}"
            th:text="${entry.value}"
-           th:href="@{/viewProject?={id}(id=${entry.key})}">
+           th:href="@{/viewProject(id=${entry.key})}">
         </a>
 
     </div>

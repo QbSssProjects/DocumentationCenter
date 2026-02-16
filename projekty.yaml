@@ -1,9 +1,7 @@
 projekty:
-  - name: proj1
+  - name: '123'
     id: 1
-  - name: proj2
+  - name: '456'
     id: 2
-  - name: aaa
+  - name: '789'
     id: 3
-  - name: '1123'
-    id: 4
