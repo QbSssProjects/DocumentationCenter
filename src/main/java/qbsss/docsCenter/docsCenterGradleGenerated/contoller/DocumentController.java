@@ -44,10 +44,15 @@ public class DocumentController {
     @PostMapping("/preview")
     @ResponseBody
     public String preview(@RequestBody String markdown) {
+        System.out.println("DEBUG: " +  markdown);
         if(markdown==null)
         {
-            //
+            return service.renderRaw("\n");
         }
-        return service.renderRaw(markdown);
+        else
+        {
+            return service.renderRaw(markdown);
+        }
+
     }
 }
