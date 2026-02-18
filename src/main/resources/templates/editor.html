@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Markdown Editor</title>
+    <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
+</head>
+<body>
+
+<h2>Markdown Editor</h2>
+
+<form method="post" action="/docs/save">
+    <input type="text" name="title" placeholder="Title"/>
+    <br><br>
+
+    <textarea name="content" rows="20" cols="100">
+[[${content}]]
+    </textarea>
+
+
+
+    <br><br>
+    <button type="submit">Save</button>
+</form>
+<div id="preview" class="markdown-body"></div>
+
+<script>
+    const textarea = document.querySelector("textarea");
+    const preview = document.getElementById("preview");
+
+    textarea.addEventListener("input", async () => {
+        const response = await fetch("/docs/preview", {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: textarea.value
+        });
+        preview.innerHTML = await response.text();
+    });
+</script>
+
+</body>
+</html>
