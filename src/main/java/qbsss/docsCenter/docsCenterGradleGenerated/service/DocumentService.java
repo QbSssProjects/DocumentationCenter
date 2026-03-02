@@ -33,16 +33,24 @@ public class DocumentService {
     public Document save(String title, String markdown) {
         Document doc = new Document();
         doc.setTitle(title);
-        doc.setContent(Arrays.toString(markdown.getBytes(StandardCharsets.UTF_8)));
+        doc.setContent(markdown);
+        doc.setContentType("markdown");
         return repository.save(doc);
     }
 
-    public Document update(Long id, String markdown) {
+    public Document update(Long id, String title, String markdown) {
         Document doc = repository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Document not found"));
-        doc.setContent(Arrays.toString(markdown.getBytes(StandardCharsets.UTF_8)));
+        doc.setTitle(title);
+        doc.setContent(markdown);
         return repository.save(doc);
+    }
+
+    public Document getDocument(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Document not found"));
     }
 
     public String renderHtml(Long id) {
@@ -50,8 +58,7 @@ public class DocumentService {
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Document not found"));
 
-        String markdown = new String(doc.getContent().getBytes(), StandardCharsets.UTF_8);
-        return renderer.render(parser.parse(markdown));
+        return renderer.render(parser.parse(doc.getContent()));
     }
 
     public String getMarkdown(Long id) {
@@ -59,7 +66,7 @@ public class DocumentService {
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Document not found"));
 
-        return new String(doc.getContent().getBytes(), StandardCharsets.UTF_8);
+        return doc.getContent();
     }
 
     public List<Document> getDocuments() {

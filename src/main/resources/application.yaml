@@ -1,7 +1,11 @@
 spring:
+
   application:
+
     name: docsCenterGradleGenerated
+
   servlet:
+
     multipart:
       max-file-size: 2500MB
       max-request-size: 2500MB

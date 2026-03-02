@@ -14,8 +14,11 @@ public class Document {
 
     private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String content;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String content; // JSON z Tiptap
+
+    @Column(nullable = false)
+    private String contentType; // markdown / html / json
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -55,5 +58,13 @@ public class Document {
     }
     public String getDescription() {
         return description;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getContentType() {
+        return contentType;
     }
 }

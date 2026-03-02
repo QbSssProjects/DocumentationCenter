@@ -22,16 +22,26 @@ public class DocumentController {
     }
 
     @PostMapping("/save")
-    public String save(@RequestParam String title,
+    public String save(@RequestParam(required = false) Long id,
+                       @RequestParam String title,
                        @RequestParam String content) {
 
-        Document doc = service.save(title, content);
+        Document doc;
+        if (id != null) {
+            // UPDATE - edycja istniejącego dokumentu
+            doc = service.update(id, title, content);
+        } else {
+            // CREATE - nowy dokument
+            doc = service.save(title, content);
+        }
         return "redirect:/docs/edit/" + doc.getId();
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
+        Document doc = service.getDocument(id);
         model.addAttribute("id", id);
+        model.addAttribute("title", doc.getTitle());
         model.addAttribute("content", service.getMarkdown(id));
         return "editor";
     }

@@ -3,37 +3,224 @@
 <head>
     <title>Markdown Editor</title>
     <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
+    <style>
+        a:link {
+            color: #00e5ff;
+        }
+        a:visited {
+            color: #ff5757;
+        }
+        a:hover {
+            color: #f1aa00;
+        }
+
+        .editor-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .editor-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .editor-panel, .preview-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            min-height: 500px;
+        }
+
+        .panel-header {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        #markdown-input {
+            width: 100%;
+            min-height: 450px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-primary);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        #markdown-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        }
+
+        #preview {
+            color: var(--text-primary);
+            overflow-wrap: break-word;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            .editor-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h2>Markdown Editor</h2>
+<div class="editor-container">
+    <h2>Markdown Editor</h2>
 
-<form method="post" action="/docs/save">
-    <input type="text" name="title" placeholder="Title"/>
-    <br><br>
+    <form method="post" action="/docs/save" id="editor-form">
+        <!-- Hidden input z ID (jeśli edytujemy istniejący dokument) -->
+        <input type="hidden" name="id" th:value="${id}" th:if="${id != null}"/>
 
-    <textarea name="content" rows="20" cols="100">
-[[${content}]]
-    </textarea>
+        <div class="input-group">
+            <label>Tytuł dokumentu</label>
+            <input type="text"
+                   name="title"
+                   class="input-field"
+                   placeholder="Wprowadź tytuł..."
+                   th:value="${title}"
+                   required/>
+        </div>
 
+        <div class="editor-layout">
+            <!-- Panel edytora -->
+            <div class="editor-panel">
+                <div class="panel-header">📝 Markdown Source</div>
+                <textarea
+                        id="markdown-input"
+                        name="content"
+                        placeholder="# Witaj w edytorze Markdown!
 
+## Podstawowa składnia
 
-    <br><br>
-    <button type="submit">Save</button>
-</form>
-<div id="preview" class="markdown-body"></div>
+**Pogrubienie** i *kursywa*
+
+- Lista wypunktowana
+- Drugi element
+
+1. Lista numerowana
+2. Drugi element
+
+```java
+public class Example {
+    // Kod
+}
+```
+
+> Cytat
+
+[Link](https://example.com)"
+                        th:text="${content}"></textarea>
+            </div>
+
+            <!-- Panel podglądu -->
+            <div class="preview-panel">
+                <div class="panel-header">👁️ Live Preview</div>
+                <div id="preview" class="markdown-body"></div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button type="submit" class="btn btn-green">💾 Zapisz dokument</button>
+            <button type="button" class="btn btn-red" onclick="window.location.href='/viewDocs'">
+                ❌ Anuluj
+            </button>
+        </div>
+    </form>
+</div>
 
 <script>
-    const textarea = document.querySelector("textarea");
+    const textarea = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
 
-    textarea.addEventListener("input", async () => {
-        const response = await fetch("/docs/preview", {
-            method: "POST",
-            headers: { "Content-Type": "text/plain" },
-            body: textarea.value
-        });
-        preview.innerHTML = await response.text();
+    // Funkcja debounce - opóźnia wywołanie o 300ms
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Funkcja renderująca preview
+    async function updatePreview() {
+        const markdown = textarea.value;
+
+        if (!markdown || markdown.trim() === '') {
+            preview.innerHTML = '<p style="color: var(--text-secondary);">Podgląd pojawi się tutaj...</p>';
+            return;
+        }
+
+        try {
+            const response = await fetch("/docs/preview", {
+                method: "POST",
+                headers: { "Content-Type": "text/plain; charset=UTF-8" },
+                body: markdown
+            });
+
+            if (response.ok) {
+                preview.innerHTML = await response.text();
+            } else {
+                preview.innerHTML = '<p style="color: var(--btn-red);">Błąd renderowania</p>';
+            }
+        } catch (error) {
+            console.error('Preview error:', error);
+            preview.innerHTML = '<p style="color: var(--btn-red);">Błąd połączenia</p>';
+        }
+    }
+
+    // Debounced wersja updatePreview
+    const debouncedUpdate = debounce(updatePreview, 300);
+
+    // Event listener
+    textarea.addEventListener("input", debouncedUpdate);
+
+    // Inicjalne renderowanie (jeśli edytujemy istniejący dokument)
+    if (textarea.value.trim() !== '') {
+        updatePreview();
+    }
+
+    // Skróty klawiszowe
+    textarea.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + S = Zapis
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            document.getElementById('editor-form').submit();
+        }
+
+        // Tab = wcięcie (zamiast zmiany focusu)
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            textarea.value = textarea.value.substring(0, start) + '    ' + textarea.value.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start + 4;
+        }
     });
 </script>
 
