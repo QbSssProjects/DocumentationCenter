@@ -290,14 +290,24 @@ nav a:hover {
 }
 
 .markdown-body pre {
-    background: #f6f8fa;
-    padding: 10px;
-    border-radius: 6px;
+    background-color: #807c7c;
+    padding: 2px 4px;
+    border-radius: 4px;
     overflow-x: auto;
 }
 
 .markdown-body code {
-    background: #eee;
+    background-color: #807c7c;
     padding: 2px 4px;
     border-radius: 4px;
 }
+
+.markdown-body a:link {
+    color: #00e5ff;
+        }
+.markdown-body a:visited {
+    color: #ff5757;
+        }
+.markdown-body a:hover {
+    color: #f1aa00;
+    }
