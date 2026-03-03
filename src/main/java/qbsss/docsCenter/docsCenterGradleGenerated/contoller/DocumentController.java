@@ -20,7 +20,7 @@ public class DocumentController {
     public String newDoc() {
         return "editor";
     }
-
+    // submiting edit on document function
     @PostMapping("/save")
     public String save(@RequestParam(required = false) Long id,
                        @RequestParam String title,
@@ -34,7 +34,7 @@ public class DocumentController {
             // CREATE - nowy dokument
             doc = service.save(title, content);
         }
-        return "redirect:/docs/edit/" + doc.getId();
+        return "redirect:/viewDocs";
     }
 
     @GetMapping("/edit/{id}")

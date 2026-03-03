@@ -161,7 +161,11 @@ public class Example {
         </div>
 
         <div class="toolbar">
-            <button type="submit" class="btn btn-green">💾 Zapisz dokument</button>
+            <a href="/viewDocs" class="btn btn-blue">
+                <button type="submit" class="btn btn-green" onclick="window.location.href='/viewDocs'"
+                        onsubmit="window.location.href='/viewDocs'">💾 Zapisz dokument
+                </button>
+            </a>
             <button type="button" class="btn btn-red" onclick="window.location.href='/viewDocs'">
                 ❌ Anuluj
             </button>
