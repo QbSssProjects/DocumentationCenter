@@ -27,12 +27,19 @@
         </a>
 
     </div>
+
     <div class="card-grid">
+
         <div class="card" th:each="doc : ${documents}">
+            <a href="@{/docs/view/(id=${doc.key})}">
             <h3 th:text="${doc.title}"></h3>
             <p th:text="${doc.description}"></p>
+            </a>
         </div>
+
     </div>
+
+
     <p th:if="${#lists.isEmpty(documents)}">
         Brak dokumentów
     </p>

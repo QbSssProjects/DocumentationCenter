@@ -37,6 +37,7 @@ public class ViewDocumentationFilesController {
         model.addAttribute("documents", documentService.getDocuments());
 
 
+
         Map<Integer, String> projekty =
                 ProjektyYamlReader.readProjekty("projekty.yaml");
         // Przekazanie mapy do th

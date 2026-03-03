@@ -3,13 +3,81 @@
 <head>
     <title>Preview</title>
     <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
-    <style>
 
+    <!-- Highlight.js - Syntax highlighting dla bloków kodu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Dodatkowe języki (opcjonalnie) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
+
+    <style>
+        .markdown-body {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+        }
+
+        .markdown-body pre {
+            background: #1e1e1e !important;
+            padding: 1rem !important;
+            border-radius: 8px !important;
+            overflow-x: auto !important;
+            margin: 1rem 0 !important;
+        }
+
+        .markdown-body code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        /* Inline code */
+        .markdown-body :not(pre) > code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: #f8c555;
+        }
+
+        /* Numer linii (opcjonalnie) */
+        .hljs-ln-numbers {
+            text-align: right;
+            color: #6e7681;
+            border-right: 1px solid #3d444d;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
 
+<nav>
+    <div class="logo">ZenSpace</div>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/viewDocs">Pliki</a></li>
+        <li><a href="/docs/new" class="btn btn-green" style="padding: 0.5rem 1rem;">+ Nowy dokument</a></li>
+    </ul>
+</nav>
+
 <div class="markdown-body" th:utext="${html}"></div>
+
+<script>
+    // Inicjalizacja syntax highlighting
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+</script>
 
 </body>
 </html>
