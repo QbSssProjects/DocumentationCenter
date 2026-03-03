@@ -7,14 +7,14 @@
     <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
 
     <meta charset="UTF-8">
-    <title>Strona startowa</title>
+    <title>ZenSpace - Dokumentacja</title>
 </head>
 <body>
 <nav>
     <div class="logo">ZenSpace</div>
     <ul>
         <li><a href="http://localhost:8080/">Home</a></li>
-        <li><a href="http://localhost:8080/viewDocs">Pliki</a></li>
+        <li><a href="http://localhost:8080/viewDocs">Projekty</a></li>
     </ul>
 </nav>
 
@@ -24,11 +24,25 @@
             <h3>Minimalizm</h3>
             <p>Mniej znaczy więcej. Skupiamy się na treści, odcinając zbędne dystraktory.</p>
         </div>
+        <div class="card">
+            <h3>Organizacja</h3>
+            <p>Wszystkie dokumenty organizowane w projektach, łatwe do wyszukania i zarządzania.</p>
+        </div>
+        <div class="card">
+            <h3>Markdown</h3>
+            <p>Pisz naturalnie w Markdown, obserwuj podgląd HTML w czasie rzeczywistym.</p>
+        </div>
     </div>
-    <form method="POST" action="/files/upload" enctype="multipart/form-data">
-        <input type="file" name="file"/>
-        <button type="submit">Upload</button>
-    </form>
+
+    <!-- ✅ NOWE: Sekcja akcji -->
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 3rem; justify-content: center;">
+        <a href="http://localhost:8080/viewDocs" class="btn btn-green" style="padding: 12px 24px; font-size: 16px;">
+            📚 Przeglądaj projekty
+        </a>
+        <a href="http://localhost:8080/projects/new" class="btn btn-blue" style="padding: 12px 24px; font-size: 16px;">
+            ➕ Nowy projekt
+        </a>
+    </div>
 </main>
 </body>
 </html>

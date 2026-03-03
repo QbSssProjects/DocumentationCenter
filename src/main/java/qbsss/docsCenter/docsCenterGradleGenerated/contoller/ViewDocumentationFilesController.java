@@ -1,56 +1,36 @@
 package qbsss.docsCenter.docsCenterGradleGenerated.contoller;
 
-
-import org.apache.catalina.Globals;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import qbsss.docsCenter.docsCenterGradleGenerated.database.dbItems.Document;
-import qbsss.docsCenter.docsCenterGradleGenerated.database.repository.DocumentRepository;
-import qbsss.docsCenter.docsCenterGradleGenerated.service.DocumentService;
-import qbsss.docsCenter.docsCenterGradleGenerated.service.ListOfProjectsService;
-import qbsss.docsCenter.docsCenterGradleGenerated.utils.ProjektyYamlReader;
+import qbsss.docsCenter.docsCenterGradleGenerated.database.dbItems.Project;
+import qbsss.docsCenter.docsCenterGradleGenerated.service.ProjectService;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
 
+/**
+ * Kontroler do przeglądania dokumentów i projektów.
+ * ZMIENIONO: Projekty są teraz pobierane z SQLite zamiast YAML.
+ */
 @Controller
 @RequestMapping("/viewDocs")
 public class ViewDocumentationFilesController {
 
-    private final DocumentService documentService;
-    @Autowired
-    private DocumentRepository documentRepository;
+    private final ProjectService projectService;
 
-    public ViewDocumentationFilesController(DocumentService documentService) {
-        this.documentService = documentService;
+    public ViewDocumentationFilesController(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
     @RequestMapping
-    public String viewDocs(Model model) throws IOException {
+    public String viewDocs(Model model) {
+        // ✅ Pobieranie projektów z SQLite zamiast YAML
+        List<Project> projects = projectService.getAllProjects();
+        model.addAttribute("projects", projects);
 
-        File file = new File(System.getProperty("user.dir"), "projekty.yaml");
-
-        List<Document> documents = documentRepository.findAll();
-        model.addAttribute("documents", documents);
-
-
-
-        Map<Integer, String> projekty =
-                ProjektyYamlReader.readProjekty("projekty.yaml");
-        // Przekazanie mapy do th
-        model.addAttribute("projects", projekty);
-
-
-
+        System.out.println("✅ ViewDocs: Loaded " + projects.size() + " projects from SQLite");
 
         return "viewDocumentationFiles";
     }

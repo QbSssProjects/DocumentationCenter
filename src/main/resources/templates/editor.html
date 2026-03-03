@@ -112,6 +112,9 @@
         <!-- Hidden input z ID (jeśli edytujemy istniejący dokument) -->
         <input type="hidden" name="id" th:value="${id}" th:if="${id != null}"/>
 
+        <!-- ✅ NOWE: Hidden input z projectId - OBOWIĄZKOWY -->
+        <input type="hidden" name="projectId" th:value="${projectId}" required/>
+
         <div class="input-group">
             <label>Tytuł dokumentu</label>
             <input type="text"
@@ -162,11 +165,13 @@ public class Example {
 
         <div class="toolbar">
             <a href="/viewDocs" class="btn btn-blue">
-                <button type="submit" class="btn btn-green" onclick="window.location.href='/viewDocs'"
-                        onsubmit="window.location.href='/viewDocs'">💾 Zapisz dokument
+                <button type="submit" class="btn btn-green"
+                        th:onclick="'window.location.href=\'/projects/\' + document.querySelector(\'input[name=projectId]\').value'"
+                        onsubmit="return true">💾 Zapisz dokument
                 </button>
             </a>
-            <button type="button" class="btn btn-red" onclick="window.location.href='/viewDocs'">
+            <button type="button" class="btn btn-red"
+                    th:onclick="'window.location.href=\'/projects/\' + document.querySelector(\'input[name=projectId]\').value'">
                 ❌ Anuluj
             </button>
         </div>

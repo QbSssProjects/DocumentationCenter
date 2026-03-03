@@ -21,9 +21,9 @@
 
 <main class="main-content">
     <div class="sidenav">
-        <a th:each="entry : ${projects}"
-           th:text="${entry.value}"
-           th:href="@{/viewProject(id=${entry.key})}">
+        <a th:each="project : ${projects}"
+           th:text="${project.name}"
+           th:href="@{/projects/{id}(id=${project.id})}">
         </a>
 
     </div>
@@ -42,11 +42,11 @@
     </div>
 
 
-    <p th:if="${#lists.isEmpty(documents)}">
-        Brak dokumentów
+    <p th:if="${#lists.isEmpty(projects)}" style="text-align: center; color: var(--text-secondary);">
+        Brak projektów. <a href="/projects/new" style="color: var(--accent);">Utwórz pierwszy projekt</a>
     </p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="http://localhost:8080/addProject" class="btn btn-green">Dodaj nowy projekt</a>
+        <a href="/projects/new" class="btn btn-green">➕ Dodaj nowy projekt</a>
     </div>
 </main>
 </body>

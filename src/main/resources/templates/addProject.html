@@ -7,39 +7,45 @@
     <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
 
     <meta charset="UTF-8">
-    <title>Przeglądarka dokumentacji</title>
+    <title>Zarządzanie projektami - ZenSpace</title>
 </head>
 <body>
 <nav>
     <div class="logo">ZenSpace</div>
     <ul>
         <li><a href="http://localhost:8080/">Home</a></li>
-        <li><a href="http://localhost:8080/viewDocs">Pliki</a></li>
-
+        <li><a href="http://localhost:8080/viewDocs">Projekty</a></li>
     </ul>
 </nav>
 
 <main class="main-content">
-    <div class="sidenav">
-        <a th:each="entry : ${projects}"
-           th:text="${entry.value}"
-           th:href="@{/viewProject(id=${entry.key})}">
-        </a>
-    </div>
-    <form th:action="@{/addProject}" method="post">
-        <div class="card" style="max-width: 500px;">
-        <h3>Tworzenie projektu</h3>
+    <form th:action="@{/projects}" method="post">
+        <div class="card" style="max-width: 500px; margin: 2rem auto;">
+            <h3>Tworzenie nowego projektu</h3>
 
-        <div class="input-group">
+            <div class="input-group">
+                <label>Nazwa projektu</label>
+                <input type="text"
+                       class="input-field"
+                       placeholder="np. Programowanie aplikacji mobilnych"
+                       name="name"
+                       required>
+            </div>
 
-            <label>Tytuł projektu</label>
-            <input type="text" class="input-field" placeholder="np. Programowanie aplikacji mobilnych" name="projectName" pattern="^[^{}]*$"  required>
+            <div class="input-group">
+                <label>Opis projektu (opcjonalnie)</label>
+                <textarea class="input-field"
+                          placeholder="Krótki opis projektu..."
+                          name="description"
+                          rows="4"></textarea>
+            </div>
 
-        </div>
-        <button class="btn btn-primary" style="width: 100%;" type="submit">Zapisz</button>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-green" style="flex: 1;" type="submit">✅ Utwórz projekt</button>
+                <a href="/viewDocs" class="btn btn-blue" style="flex: 1; text-align: center;">← Wróć</a>
+            </div>
         </div>
     </form>
-
 
 </main>
 </body>
