@@ -311,3 +311,149 @@ nav a:hover {
 .markdown-body a:hover {
     color: #f1aa00;
     }
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TABELE - GFM Tables Support                                    */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5rem 0;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Nagłówek tabeli */
+.markdown-body table thead {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0.15) 100%);
+    border-bottom: 2px solid #6366f1;
+}
+
+.markdown-body table thead th {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-weight: 700;
+    color: #ffffff;
+    border-right: 1px solid #ffffff;
+}
+
+.markdown-body table thead th:last-child {
+    border-right: none;
+}
+
+/* Ciało tabeli */
+.markdown-body table tbody {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.markdown-body table tbody tr {
+    border-bottom: 1px solid #ffffff;
+    transition: background-color 0.2s ease;
+}
+
+.markdown-body table tbody tr:hover {
+    background-color: rgba(99, 102, 241, 0.15);
+}
+
+.markdown-body table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Komórki tabeli */
+.markdown-body table td {
+    padding: 0.9rem 1.2rem;
+    border-right: 1px solid #ffffff;
+    color: #f0f0f0;
+}
+
+.markdown-body table td:last-child {
+    border-right: none;
+}
+
+/* Alignment - wyrównanie tekstu */
+.markdown-body table th[align="center"],
+.markdown-body table td[align="center"] {
+    text-align: center;
+}
+
+.markdown-body table th[align="right"],
+.markdown-body table td[align="right"] {
+    text-align: right;
+}
+
+.markdown-body table th[align="left"],
+.markdown-body table td[align="left"] {
+    text-align: left;
+}
+
+/* Code w tabelach */
+.markdown-body table code {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #00e5ff;
+}
+
+/* Links w tabelach */
+.markdown-body table a {
+    color: #6366f1;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.markdown-body table a:hover {
+    border-bottom-color: #6366f1;
+    color: #818cf8;
+}
+
+/* Responsive tabele na mobile */
+@media (max-width: 768px) {
+    .markdown-body table {
+        font-size: 0.9rem;
+        margin: 1rem 0;
+    }
+
+    .markdown-body table th,
+    .markdown-body table td {
+        padding: 0.7rem 0.9rem;
+    }
+
+    .markdown-body table thead {
+        display: none;
+    }
+
+    .markdown-body table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #ffffff;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .markdown-body table td {
+        display: block;
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #ffffff;
+    }
+
+    .markdown-body table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        font-weight: 600;
+        color: #6366f1;
+    }
+
+    .markdown-body table td:last-child {
+        border-bottom: none;
+    }
+}

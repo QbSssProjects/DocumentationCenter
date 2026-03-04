@@ -4,17 +4,85 @@
     <title>Preview</title>
     <link rel="stylesheet" th:href="@{/css/mainStyles.css}">
 
-    <!-- Highlight.js - Syntax highlighting dla bloków kodu -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Highlight.js - LOKALNE PLIKI -->
+    <!-- CSS Theme z lokalnych plików -->
+    <link rel="stylesheet" th:href="@{/js/highlight/styles/github-dark.min.css}">
 
-    <!-- Dodatkowe języki (opcjonalnie) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
+    <!-- Główny plik highlight.js z lokalnych plików -->
+    <script th:src="@{/js/highlight/highlight.min.js}"></script>
+
+    <!-- Wszystkie dostępne języki z lokalnych plików -->
+    <script th:src="@{/js/highlight/languages/bash.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/c.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/cpp.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/csharp.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/css.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/dockerfile.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/go.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/java.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/javascript.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/json.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/kotlin.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/lua.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/markdown.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/perl.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/php.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/python.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/ruby.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/rust.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/scala.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/shell.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/sql.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/swift.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/typescript.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/xml.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/yaml.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/plaintext.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/diff.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/gradle.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/groovy.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/ini.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/properties.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/makefile.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/nginx.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/powershell.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/r.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/sass.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/scheme.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/vim.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/zsh.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/clojure.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/erlang.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/fsharp.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/haskell.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/lisp.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/ocaml.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/prolog.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/tex.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/verilog.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/vhdl.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/asm.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/aspnet.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/autohotkey.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/cmake.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/cobol.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/coffeescript.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/dart.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/delphi.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/django.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/dos.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/elixir.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/elm.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/excel.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/gml.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/glsl.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/jvm.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/jinja.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/less.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/objectivec.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/scss.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/stylus.min.js}"></script>
+    <script th:src="@{/js/highlight/languages/twig.min.js}"></script>
 
     <style>
         .markdown-body {
@@ -54,6 +122,90 @@
             border-right: 1px solid #3d444d;
             padding-right: 10px;
             margin-right: 10px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* TABELE - JAWNE STYLING W TEMPLATE'U */
+        /* ═══════════════════════════════════════════════════════════════ */
+
+        .markdown-body table {
+            border-collapse: collapse !important;
+            width: 100% !important;
+            margin: 1.5rem 0 !important;
+            border: 2px solid #ffffff !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Nagłówek tabeli */
+        .markdown-body table thead {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0.15) 100%) !important;
+            border-bottom: 2px solid #6366f1 !important;
+        }
+
+        .markdown-body table thead th {
+            padding: 1rem 1.2rem !important;
+            text-align: left !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            border-right: 1px solid #ffffff !important;
+            border: 1px solid #ffffff !important;
+        }
+
+        .markdown-body table thead th:last-child {
+            border-right: none !important;
+        }
+
+        /* Ciało tabeli */
+        .markdown-body table tbody {
+            background-color: rgba(255, 255, 255, 0.02) !important;
+        }
+
+        .markdown-body table tbody tr {
+            border-bottom: 1px solid #ffffff !important;
+            transition: background-color 0.2s ease !important;
+        }
+
+        .markdown-body table tbody tr:hover {
+            background-color: rgba(99, 102, 241, 0.15) !important;
+        }
+
+        .markdown-body table tbody tr:last-child {
+            border-bottom: none !important;
+        }
+
+        /* Komórki tabeli */
+        .markdown-body table td {
+            padding: 0.9rem 1.2rem !important;
+            border-right: 1px solid #ffffff !important;
+            border: 1px solid #ffffff !important;
+            color: #f0f0f0 !important;
+        }
+
+        .markdown-body table td:last-child {
+            border-right: none !important;
+        }
+
+        /* Code w tabelach */
+        .markdown-body table code {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            padding: 0.25rem 0.5rem !important;
+            border-radius: 3px !important;
+            font-size: 0.9em !important;
+            color: #00e5ff !important;
+        }
+
+        /* Links w tabelach */
+        .markdown-body table a {
+            color: #6366f1 !important;
+            text-decoration: none !important;
+        }
+
+        .markdown-body table a:hover {
+            border-bottom-color: #6366f1 !important;
+            color: #818cf8 !important;
         }
     </style>
 </head>
