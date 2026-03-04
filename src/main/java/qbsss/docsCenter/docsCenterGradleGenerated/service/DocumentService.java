@@ -2,6 +2,7 @@ package qbsss.docsCenter.docsCenterGradleGenerated.service;
 
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
+import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,6 +11,7 @@ import qbsss.docsCenter.docsCenterGradleGenerated.database.dbItems.Project;
 import qbsss.docsCenter.docsCenterGradleGenerated.database.repository.DocumentRepository;
 import qbsss.docsCenter.docsCenterGradleGenerated.database.repository.ProjectRepository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,14 +19,23 @@ import java.util.Optional;
  * Service dla zarządzania dokumentami.
  * ✅ ZMIENIONO: Dokumenty MUSZĄ być przypisane do projektu!
  * Usunięto obsługę "domyślnego projektu" - to było źródłem problemu.
+ * ✅ ZMIENIONO: Parser obsługuje teraz GFM Tables!
  */
 @Service
 public class DocumentService {
 
     private final DocumentRepository documentRepository;
     private final ProjectRepository projectRepository;
-    private final Parser parser = Parser.builder().build();
-    private final HtmlRenderer renderer = HtmlRenderer.builder().build();
+
+    // ✅ Parser z obsługą tabel (GFM Tables Extension)
+    private final Parser parser = Parser.builder()
+            .extensions(Arrays.asList(TablesExtension.create()))
+            .build();
+
+    // ✅ Renderer z obsługą tabel
+    private final HtmlRenderer renderer = HtmlRenderer.builder()
+            .extensions(Arrays.asList(TablesExtension.create()))
+            .build();
 
     public DocumentService(DocumentRepository documentRepository, ProjectRepository projectRepository) {
         this.documentRepository = documentRepository;
