@@ -6,8 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import qbsss.docsCenter.docsCenterGradleGenerated.database.dbItems.Document;
+import qbsss.docsCenter.docsCenterGradleGenerated.database.dbItems.Project;
+import qbsss.docsCenter.docsCenterGradleGenerated.database.repository.DocumentRepository;
+import qbsss.docsCenter.docsCenterGradleGenerated.database.repository.ProjectRepository;
 import qbsss.docsCenter.docsCenterGradleGenerated.service.DocumentService;
 import qbsss.docsCenter.docsCenterGradleGenerated.service.ProjectService;
+
+import java.util.Optional;
 
 /**
  * Controller zarządzający dokumentami.
@@ -17,13 +22,17 @@ import qbsss.docsCenter.docsCenterGradleGenerated.service.ProjectService;
 @Controller
 @RequestMapping("/docs")
 public class DocumentController {
+    private final ProjectRepository projectRepository;
 
     private final DocumentService documentService;
     private final ProjectService projectService;
+    private final DocumentRepository documentRepository;
 
-    public DocumentController(DocumentService documentService, ProjectService projectService) {
+    public DocumentController(ProjectRepository projectRepository, DocumentService documentService, ProjectService projectService, DocumentRepository documentRepository) {
+        this.projectRepository = projectRepository;
         this.documentService = documentService;
         this.projectService = projectService;
+        this.documentRepository = documentRepository;
     }
 
     // ═══════════════════════════════════════════════════════════════════════════════
@@ -90,6 +99,23 @@ public class DocumentController {
         model.addAttribute("content", documentService.getMarkdown(id));
         System.out.println("📝 edit() - Opening editor for documentId=" + id + ", projectId=" + doc.getProject().getId());
         return "editor";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id
+                         /*@RequestParam Long projectId*/) {
+        Document doc = documentService.getDocument(id);
+
+
+
+        Optional<Project> projectIdFromDocument = documentRepository.findById(id).map(Document::getProject);
+        System.out.println("PROJECT ID FORM DOCUMENT: " + projectIdFromDocument.get().getId());
+
+        documentService.delete(id);
+
+
+
+        return "redirect:/projects/" + projectIdFromDocument.get().getId();
     }
 
     /**

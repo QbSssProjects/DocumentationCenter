@@ -43,6 +43,17 @@ public class DocumentService {
         System.out.println("✅ DocumentService initialized with repositories");
     }
 
+    public Document delete(Long id) {
+        Optional<Document> doc = documentRepository.findById(id);
+        if (doc.isPresent()) {
+            System.out.println("DOC TO BE DELETED ID: " + id + "\n DOC INFO" + doc.get());
+            documentRepository.delete(doc.get());
+            return doc.get();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Document not found");
+        }
+    }
+
     /**
      * ✅ NOWA WERSJA: Tworzenie dokumentu WYMAGA projectId
      * Nie ma już obsługi "domyślnego projektu"

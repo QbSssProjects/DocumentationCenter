@@ -35,4 +35,6 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
      * Usunięcie wszystkich dokumentów dla projektu (kaskadowe)
      */
     void deleteByProjectId(Long projectId);
+
+    Optional<Document> findById(Long id);
 }
