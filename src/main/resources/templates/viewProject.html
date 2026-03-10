@@ -38,6 +38,7 @@
                 <p th:text="${doc.description}">Short description...</p>
             </a>
             <a th:href="@{/docs/delete/{id}(id=${doc.id})}"><button class="btn btn-red">usun</button></a>
+            <a th:href="@{/docs/edit/{id}(id=${doc.id})}"><button class="btn btn-green">edytuj</button></a>
         </div>
     </div>
 
